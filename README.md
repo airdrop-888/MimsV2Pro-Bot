@@ -42,7 +42,8 @@
 
 ## 📸 Preview
 
-<img width="675" height="493" alt="preview" src="https://github.com/user-attachments/assets/d4961a4d-9a2a-49b2-ade6-9136708dc780" />
+<img width="749" height="367" alt="preview" src="https://github.com/user-attachments/assets/29e06e4b-9796-4eb0-beca-e7e9ebf2e83b" />
+
 
 
 > *Dashboard real-time dengan multi-worker, progress tracker, dan smart resume system*
