@@ -25,8 +25,9 @@
 
 <div align="center">
 
-> ### ~~Rp 250.000~~
-> ## 🔥 **Rp 50.000** 🔥
+> ### ~~Rp 250.000 / $25~~
+> ## 🔥 **Rp 50.000** 🔥 (Khusus User Indo)
+> ## 💸 **$15** (Non-Indo, pay with USDT only)
 > ### Harga khusus untuk **user tercepat!**
 > ⚠️ *Slot terbatas — habis, harga kembali normal!*
 
@@ -58,10 +59,11 @@
 | 🔑 **Auto API Key** | Buat & ekstrak API Key langsung setelah register berhasil |
 | 👥 **Multi-Worker** | Jalankan beberapa akun secara paralel (hemat waktu!) |
 | 📋 **Smart Resume** | Otomatis skip akun yang sudah berhasil — aman restart kapan saja |
-| 🔗 **Auto Ref Bind** | Bind referral code otomatis setelah register |
-| 📊 **Live Dashboard** | Progress real-time dengan spinner animasi di console |
+| 🍪 **Cookie Pool System**| Bind referral otomatis via rotasi Cookie. Slot (30/30) dilacak real-time! |
+| 🔗 **Auto Ref Bind** | Pilih cookie dengan slot terbanyak secara otomatis setelah register |
+| 📊 **Live Dashboard** | Progress real-time dengan spinner animasi & status slot cookie di console |
 | 💾 **Dual Output** | Simpan ke `results.txt` (email\|apiKey) & `apikeys.txt` (key saja) |
-| 🛡️ **Anti-Bot Bypass** | Stealth mode dengan Chrome asli, bukan Chromium bawaan Playwright |
+| 🛡️ **Anti-Bot Bypass** | Stealth mode dengan isolasi profile Chrome per-akun (User Data Dir) |
 
 ---
 
@@ -109,8 +111,10 @@ Bot akan menanyakan:
 mimoRegister-Bot/
 ├── index.js          # 🤖 Script utama (tidak disertakan di repo ini)
 ├── dataInput.txt     # 📧 List email yang akan didaftarkan
+├── cookies.txt       # 🍪 Pool cookie inviter untuk auto bind ref (30/30)
 ├── results.txt       # ✅ Tracking: email|apiKey (auto-generated)
 ├── apikeys.txt       # 🔑 Kumpulan API Key hasil register
+├── profiles/         # 📁 Folder isolasi session per-akun (auto-cleanup)
 └── package.json      # 📦 Dependencies
 ```
 
@@ -125,14 +129,17 @@ mimoRegister-Bot/
 │  3. Proses pending      →  Multi-worker paralel     │
 │                                                     │
 │     Per akun:                                       │
-│     ├── Buka MiMo Platform                         │
+│     ├── Buat folder profile unik (isolasi cookie)   │
+│     ├── Buka MiMo Platform                          │
 │     ├── Klik "Sign in with Google"                  │
 │     ├── Input email & password Google               │
 │     ├── Handle redirect Xiaomi Account              │
 │     ├── Register / Login akun Xiaomi                │
 │     ├── Buat API Key via API                        │
-│     ├── Bind referral code (jika ada)               │
-│     └── Simpan ke results.txt & apikeys.txt         │
+│     ├── Ambil cookie terbaik dari cookies.txt       │
+│     ├── Bind referral code & kurangi slot (30/30)   │
+│     ├── Simpan ke results.txt & apikeys.txt         │
+│     └── Hapus folder profile bersih-bersih          │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -202,7 +209,8 @@ Dapatkan script lengkap sebelum kehabisan slot harga spesial!
 
 ### 📲 Admin: [https://t.me/indocafe1992](https://t.me/indocafe1992)
 
-> **💰 Harga: ~~Rp 250.000~~ → Rp 50.000**  
+> **💰 Khusus User Indo: ~~Rp 250.000~~ → Rp 50.000**  
+> **💸 Non-Indo: $15 (Pay with USDT only)**  
 > *Harga khusus untuk user tercepat — sangat terbatas!*
 
 </div>
