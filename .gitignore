@@ -1,0 +1,23 @@
+# Source code — tidak dijual gratis
+index.js
+
+# Output sensitif
+apikeys.txt
+results.txt
+bindCode.txt
+codeInfo.txt
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Profile browser (playwright)
+profiles/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+*.env
