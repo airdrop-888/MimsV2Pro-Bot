@@ -3,6 +3,7 @@
 <img src="https://img.shields.io/badge/Platform-XiaoMi%20MiMo-orange?style=for-the-badge&logo=xiaomi&logoColor=white"/>
 <img src="https://img.shields.io/badge/Node.js-v18+-green?style=for-the-badge&logo=node.js&logoColor=white"/>
 <img src="https://img.shields.io/badge/Playwright-Automation-blue?style=for-the-badge&logo=playwright&logoColor=white"/>
+<img src="https://img.shields.io/badge/Version-v1.1.0-brightgreen?style=for-the-badge"/>
 <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge"/>
 
 ```
@@ -10,12 +11,28 @@
  |  \/  (_)  \/  |___  | _ \___ __ _(_)__| |_ ___ _ _ 
  | |\/| | | |\/| / _ \ |   / -_) _` | (_-<  _/ -_) '_|
  |_|  |_|_|_|  |_\___/ |_|_\___\__, |_/__/\__\___|_|  
-                                |___/                   
+                               |___/                   
 ```
 
 # 🤖 MiMo Register Bot — XiaoMi MiMo Platform
 
-### ⚡ Auto Register + API Key Extractor | Multi-Worker | Smart Resume
+### ⚡ Auto Register + API Key Extractor | Multi-Worker | Off-Screen Mode
+
+</div>
+
+---
+
+## 🔥 What's New in v1.1.0
+
+<div align="center">
+
+| Update | Description |
+|---|---|
+| 🖥️ **Off-Screen Mode** | Browser berjalan di background tanpa mengganggu aktivitas user |
+| ⚡ **Anti-Throttle** | Renderer Chrome tetap aktif walau window off-screen |
+| 🛡️ **Anti-Hang** | Input fields menggunakan multi-fallback system (fill → keyboard → JS DOM) |
+| 🔗 **Ref Code Visibility** | Status bind ref code sekarang terlihat real-time di Dashboard |
+| 🔄 **Smart OAuth Flow** | Fallback ke login password Xiaomi jika Google OAuth bermasalah |
 
 </div>
 
@@ -45,8 +62,6 @@
 
 <img width="749" height="367" alt="preview" src="https://github.com/user-attachments/assets/29e06e4b-9796-4eb0-beca-e7e9ebf2e83b" />
 
-
-
 > *Dashboard real-time dengan multi-worker, progress tracker, dan smart resume system*
 
 ---
@@ -59,11 +74,13 @@
 | 🔑 **Auto API Key** | Buat & ekstrak API Key langsung setelah register berhasil |
 | 👥 **Multi-Worker** | Jalankan beberapa akun secara paralel (hemat waktu!) |
 | 📋 **Smart Resume** | Otomatis skip akun yang sudah berhasil — aman restart kapan saja |
-| 🍪 **Cookie Pool System**| Bind referral otomatis via rotasi Cookie. Slot (30/30) dilacak real-time! |
+| 🍪 **Cookie Pool System** | Bind referral otomatis via rotasi Cookie. Slot dilacak real-time! |
 | 🔗 **Auto Ref Bind** | Pilih cookie dengan slot terbanyak secara otomatis setelah register |
-| 📊 **Live Dashboard** | Progress real-time dengan spinner animasi & status slot cookie di console |
+| 📊 **Live Dashboard** | Progress real-time dengan spinner animasi & status di console |
 | 💾 **Dual Output** | Simpan ke `results.txt` (email\|apiKey) & `apikeys.txt` (key saja) |
-| 🛡️ **Anti-Bot Bypass** | Stealth mode dengan isolasi profile Chrome per-akun (User Data Dir) |
+| 🛡️ **Anti-Bot Bypass** | Stealth mode dengan isolasi profile Chrome per-akun (Guest Mode) |
+| 🖥️ **Off-Screen Browser** | Mode visible tanpa mengganggu — window di luar layar + anti-throttle |
+| 🔒 **Multi-Fallback Input** | Sistem 3-layer input (fill → keyboard → JS DOM) anti-hang |
 
 ---
 
@@ -99,9 +116,9 @@ node index
 
 Bot akan menanyakan:
 - 🔐 Google password (disembunyikan dengan `*`)
-- 👁️ Mode browser (y = visible / n = headless)
+- 👁️ Mode browser (`y` = visible off-screen / `n` = headless)
 - 👥 Jumlah worker paralel
-- 🔗 Referral code (opsional)
+- 🔗 Referral code (opsional — dari `cookies.txt`)
 
 ---
 
@@ -109,9 +126,9 @@ Bot akan menanyakan:
 
 ```
 mimoRegister-Bot/
-├── index.js          # 🤖 Script utama (tidak disertakan di repo ini)
+├── index.js          # 🤖 Script utama (source code — tidak di公开)
 ├── dataInput.txt     # 📧 List email yang akan didaftarkan
-├── cookies.txt       # 🍪 Pool cookie inviter untuk auto bind ref (30/30)
+├── cookies.txt       # 🍪 Pool cookie inviter untuk auto bind ref
 ├── results.txt       # ✅ Tracking: email|apiKey (auto-generated)
 ├── apikeys.txt       # 🔑 Kumpulan API Key hasil register
 ├── profiles/         # 📁 Folder isolasi session per-akun (auto-cleanup)
@@ -129,7 +146,7 @@ mimoRegister-Bot/
 │  3. Proses pending      →  Multi-worker paralel     │
 │                                                     │
 │     Per akun:                                       │
-│     ├── Buat folder profile unik (isolasi cookie)   │
+│     ├── Buat browser off-screen (Guest mode)        │
 │     ├── Buka MiMo Platform                          │
 │     ├── Klik "Sign in with Google"                  │
 │     ├── Input email & password Google               │
@@ -137,10 +154,27 @@ mimoRegister-Bot/
 │     ├── Register / Login akun Xiaomi                │
 │     ├── Buat API Key via API                        │
 │     ├── Ambil cookie terbaik dari cookies.txt       │
-│     ├── Bind referral code & kurangi slot (30/30)   │
+│     ├── Bind referral code & kurangi slot           │
 │     ├── Simpan ke results.txt & apikeys.txt         │
-│     └── Hapus folder profile bersih-bersih          │
+│     └── Tutup browser & cleanup profile             │
 └─────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🖥️ Off-Screen Mode (v1.1.0)
+
+Mode **visible off-screen** menjalankan browser Chrome di luar area layar, sehingga:
+
+- ✅ Browser **non-headless** (lebih sulit terdeteksi sebagai bot)
+- ✅ **Tidak mengganggu** aktivitas user — window berada di koordinat (-32000, -32000)
+- ✅ Renderer tetap aktif — tidak ada throttling/hibernasi berkat anti-throttle flags
+- ✅ Cocok untuk menjalankan bot sambil bekerja di komputer yang sama
+
+```
+--window-position=-32000,-32000    ← off-screen
+--disable-renderer-backgrounding   ← anti-throttle
+--disable-backgrounding-occluded-windows
 ```
 
 ---
@@ -185,17 +219,44 @@ sk-xy9876543210xyzabc
 
 ## ❓ FAQ
 
-**Q: Apakah bot ini aman?**  
-A: Bot menggunakan Chrome asli (bukan headless) dengan mode off-screen, sehingga lebih sulit terdeteksi sebagai bot.
+**Q: Apakah bot ini aman?**
+A: Bot menggunakan Chrome non-headless dengan mode off-screen, sehingga lebih sulit terdeteksi sebagai bot. Profile diisolasi per-akun dalam Guest mode.
 
-**Q: Berapa batas maksimal worker?**  
+**Q: Berapa batas maksimal worker?**
 A: Disarankan 1–3 worker. Lebih dari 3 bisa memperlambat atau trigger rate-limit Google.
 
-**Q: Apa yang terjadi jika bot dihentikan di tengah proses?**  
+**Q: Apa yang terjadi jika bot dihentikan di tengah proses?**
 A: Tidak ada masalah! Smart Resume System akan melanjutkan dari akun yang belum selesai.
 
-**Q: Apakah bisa digunakan di Linux/Mac?**  
+**Q: Apakah bisa digunakan di Linux/Mac?**
 A: Ya, bot mendukung Windows, Linux, dan macOS.
+
+**Q: Bagaimana cara bind referral code?**
+A: Masukkan email inviter di `cookies.txt`. Bot akan otomatis memilih cookie dengan slot terbanyak dan bind referral code setelah register berhasil.
+
+**Q: Kenapa bot pakai off-screen mode?**
+A: Mode off-screen menjalankan browser di luar layar sehingga tidak mengganggu pekerjaan user, sambil tetap menjaga browser dalam mode non-headless untuk anti-bot detection.
+
+---
+
+## 📝 Changelog
+
+### v1.1.0 (2026-07-12)
+- 🖥️ Added off-screen browser mode (window-position off-screen)
+- ⚡ Added anti-throttle flags (disable-renderer-backgrounding)
+- 🛡️ Replaced all `pressSequentially()` with multi-fallback input system
+- 🔗 Fixed bind ref code output visibility (spinner instead of console.log)
+- 🔄 Fixed premature throw error at Xiaomi account page
+- 🐛 Fixed Google popup keyboard context (popup.keyboard vs page.keyboard)
+
+### v1.0.0
+- 🎉 Initial release
+- 🤖 Auto register via Google OAuth
+- 🔑 Auto API Key creation
+- 👥 Multi-worker parallel processing
+- 📋 Smart Resume system
+- 🍪 Cookie Pool for referral binding
+- 📊 Live Dashboard with progress tracking
 
 ---
 
@@ -209,8 +270,8 @@ Dapatkan script lengkap sebelum kehabisan slot harga spesial!
 
 ### 📲 Admin: [https://t.me/indocafe1992](https://t.me/indocafe1992)
 
-> **💰 Khusus User Indo: ~~Rp 250.000~~ → Rp 50.000**  
-> **💸 Non-Indo: $15 (Pay with USDT only)**  
+> **💰 Khusus User Indo: ~~Rp 250.000~~ → Rp 50.000**
+> **💸 Non-Indo: $15 (Pay with USDT only)**
 > *Harga khusus untuk user tercepat — sangat terbatas!*
 
 </div>
@@ -219,7 +280,7 @@ Dapatkan script lengkap sebelum kehabisan slot harga spesial!
 
 <div align="center">
 
-Made with ❤️ by **Z3R0 0N3 ID**  
+Made with ❤️ by **Z3R0 0N3 ID**
 ⭐ Jangan lupa **Star** repo ini jika bermanfaat!
 
 </div>

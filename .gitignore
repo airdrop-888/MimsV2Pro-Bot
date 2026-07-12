@@ -1,18 +1,31 @@
 # Source code — tidak dijual gratis
 index.js
+build.js
 
 # Output sensitif
 apikeys.txt
+apikeys2.txt
 results.txt
 bindCode.txt
-codeInfo.txt
+
+# User data
+dataInput.txt
+proxy.txt
+code.txt
+progress.txt
 
 # Dependencies
 node_modules/
 package-lock.json
 
-# Profile browser (playwright)
+# Profile browser (per-akun Chrome user-data-dir)
 profiles/
+
+# Cookie pool
+cookies.txt
+
+# Preview
+preview.png
 
 # OS
 .DS_Store
